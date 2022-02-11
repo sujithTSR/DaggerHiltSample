@@ -17,10 +17,6 @@ object AppModule {
 
     // Singleton to make sure the object is created only once. Most use cases - Retrofit, Room
     // Provides - Hey, hilt - this is a dependency which is to be noted
-    @Singleton
-    @Provides
-    @Named("String1")
-    fun provideTestString() = "Example String1"
 
     @Singleton
     @Provides

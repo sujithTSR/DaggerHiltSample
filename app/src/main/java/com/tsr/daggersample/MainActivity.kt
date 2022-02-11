@@ -1,8 +1,9 @@
 package com.tsr.daggersample
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.widget.TextView
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import javax.inject.Named
@@ -17,20 +18,20 @@ import javax.inject.Named
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private val TAG: String = "MainActivity"
 
+    private val viewModel: ActivityViewModel by viewModels()
     // Inject will search in all of it's modules for a string dependency and inject the one
     // If more than 2 dependencies are returning the same type it'll be a problem for dagger to identify
     // Hence, @Named is helpful here
 
-    @Inject
-    @Named("String1")
+    @Inject @Named("String1")
     lateinit var injectedString: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        viewModel
+        findViewById<TextView>(R.id.text_view).text = injectedString
 
-        Log.v(TAG, injectedString)
     }
 }
